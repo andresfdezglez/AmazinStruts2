@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+
+	<package name="miw.Amazin" extends="struts-default">
+
+
+		<interceptors>
+			<interceptor name="login"
+				class="com.miw.presentation.login.LoginInterceptor" />
+			<interceptor-stack name="amazinLoginStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="login" />
+			</interceptor-stack>
+
+
+		</interceptors>
+
+
+		<default-interceptor-ref
+			name="amazinLoginStack" />
+		<default-action-ref name="index"></default-action-ref>
+
+		<global-results>
+			<result name="login-error">index.jsp</result>
+		</global-results>
+		
+		<action name="index">
+			<result type="dispatcher">/WEB-INF/content/login-success.jsp</result>
+		</action>
+
+		
+	</package>
+
+</struts>

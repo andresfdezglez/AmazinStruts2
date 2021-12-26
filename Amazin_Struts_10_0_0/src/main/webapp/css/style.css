@@ -1,0 +1,122 @@
+@font-face {
+	font-family: 'LearningCurveProRegular';
+	src: url('font/learning_curve_regular_ot_tt.ttf') format('truetype');
+}
+
+body {
+	font-family: Trebuchet MS, Helvetica, Aria, sans-serif;
+	color: black;
+}
+
+.centered {
+	text-align: center;
+}
+
+p {
+	color: white;
+	background-color: black;
+	opacity: 0.6;
+	width: 100%;
+}
+
+tbody tr:hover {
+	text-decoration: strong;
+	color: white;
+	background-color: black;
+}
+
+thead {
+	color:white;
+	background-color: green;
+}
+
+table caption {
+	color: green;
+	font-size: 1.6em;
+	font-style: italic;
+	font-family: 'LearningCurveProRegular', Arial, serif;
+}
+
+h1 {
+	color: blue;
+	font-size: 3em;
+	font-family: 'LearningCurveProRegular', Arial, serif;
+	text-shadow: 2px 2px 4px black;
+}
+
+h1:hover {
+	text-decoration: underline;
+	color: green;
+}
+
+h2 {
+	font-family: 'LearningCurveProRegular', Arial, serif;
+	}
+
+table {
+	border-radius: 10px;
+	border: 3px green solid;
+}
+
+.header {
+	color: green;
+	text-align: center;
+}
+
+.special {
+	color: green;
+}
+a{
+	color: grey;
+}
+nav {
+	display: inline-block;
+	width: 150px;
+	border: 2px solid green;
+	border-radius:10px;
+	vertical-align: top;
+	background: silver;
+	margin-top: 30px;
+	color:white;	
+}
+
+#a01
+{
+	
+	display: inline-block;
+	width: 750px;
+	border: 2px solid green;
+	border-radius:10px;
+	vertical-align: top;
+	margin-top: 30px;
+	
+}
+
+.mytitle
+{
+	color:green;	
+	font-size: 1.6em;
+	font-style: italic;
+	font-family: 'LearningCurveProRegular', Arial, serif;
+}
+section {
+	display: inline-block;
+	/*border: 1px solid blue;*/
+	vertical-align: top;
+	text-align: center;
+	
+}
+
+footer {
+	border: 2px solid green;
+	border-radius: 10px;
+	padding: 20px;
+	margin-top: 50px;
+	text-align: center;
+}
+
+header {
+	background-image: url("img/Buecher-coloured.svg");
+	background-repeat: no-repeat;
+	background-position: top left;
+}

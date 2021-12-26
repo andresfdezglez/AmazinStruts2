@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="Amazin_PU"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<non-jta-data-source>java:/comp/env/jdbc/AmazinDS</non-jta-data-source>
+		<properties>
+			<property name="hibernate.cache.provider_class"
+				value="org.hibernate.cache.HashtableCacheProvider" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.jdbc.batch_size" value="20" />
+			<property name="hibernate.cache.use_query_cache"
+				value="false" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.cache.use_second_level_cache"
+				value="false" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="JPA_PU"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:hsqldb:hsql://localhost/amazin" />
+			<property name="javax.persistence.jdbc.user" value="DFLANVIN" />
+			<property name="javax.persistence.jdbc.driver"
+				value="org.hsqldb.jdbc.JDBCDriver" />
+			<property name="javax.persistence.jdbc.password"
+				value="AMAZIN" />
+			<!-- 
+			<property
+				name="javax.persistence.schema-generation.database.action"
+				value="create" />
+				 -->
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="my-pu">
+		<description>My Persistence Unit</description>
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:hsqldb:hsql://localhost/amazin" />
+			<property name="javax.persistence.jdbc.user"
+				value="DFLANVIN" />
+			<property name="javax.persistence.jdbc.password"
+				value="AMAZIN" />
+		</properties>
+	</persistence-unit>
+
+</persistence>

@@ -9,6 +9,8 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.miw.model.LoginInfo;
+import com.miw.model.User;
+import com.miw.presentation.user.UserManagerServiceHelper;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
@@ -23,10 +25,9 @@ import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 })
 
-@Validations(
-	requiredStrings = {
-				@RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "loginInfo.login", message = "You must enter a value for login."),
-				@RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "loginInfo.password", message = "You must enter a value for password.") })
+@Validations(requiredStrings = {
+		@RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "loginInfo.login", message = "You must enter a value for login."),
+		@RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "loginInfo.password", message = "You must enter a value for password.") })
 
 public class LoginAction extends ActionSupport implements RequestAware, SessionAware {
 
@@ -47,8 +48,6 @@ public class LoginAction extends ActionSupport implements RequestAware, SessionA
 	public void setLoginInfo(LoginInfo login) {
 		this.login = login;
 	}
-	
-	
 
 	@Override
 	public void validate() {
@@ -59,21 +58,27 @@ public class LoginAction extends ActionSupport implements RequestAware, SessionA
 	@Override
 	public String execute() throws Exception {
 
+		UserManagerServiceHelper helper = new UserManagerServiceHelper();
+
 		if (!login.getCaptcha().equals("23344343")) {
 			request.put("mymessage", "Captcha is wrong");
 
 			return "captcha-error";
 		}
-		// We do a very basic authentication :).
-		if (login.getLogin().equals("admin") && login.getPassword().equals("amazin")) {
-			logger.debug("Loggin in!: " + login);
-			session.put("loginInfo", login);
-			return SUCCESS;
-		} else {
-			logger.debug("Credentials are wrong: " + login);
-			request.put("mymessage", "Wrong credentials");
-			return "login-error";
+
+		for (User u : helper.getUsers()) {
+
+			if (login.getLogin().equals(u.getUser()) && login.getPassword().equals(u.getPassword())) {
+				logger.debug("Loggin in!: " + login);
+				session.put("loginInfo", login);
+				return SUCCESS;
+			}
 		}
+
+		logger.debug("Credentials are wrong: " + login);
+		request.put("mymessage", "Wrong credentials");
+		return "login-error";
+
 	}
 
 	public void setRequest(Map<String, Object> request) {

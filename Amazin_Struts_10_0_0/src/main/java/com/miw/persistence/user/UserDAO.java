@@ -3,6 +3,7 @@ package com.miw.persistence.user;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,7 +29,9 @@ public class UserDAO implements UserDataService {
 				logger.debug("next user: " + next);
 			}
 
-		} finally {
+		}
+
+		finally {
 			// 100% sure that the transaction and entity manager will be closed
 			dba.closeEm();
 		}
@@ -41,19 +44,68 @@ public class UserDAO implements UserDataService {
 
 		Dba dba = new Dba();
 		try {
+
 			EntityManager em = dba.getActiveEm();
-
-			em.createQuery("INSERT INTO USER VALUES(" + u.getId()
-					+ ", " + u.getUser() + ", " + u.getPassword() + ")",
-					User.class).getResultList();
-
-			logger.debug("Insert user " + u);
+			em.persist(u);
+			em.getTransaction().commit();
+			logger.debug("User inserted " + u);
 
 		} finally {
 			// 100% sure that the transaction and entity manager will be closed
 			dba.closeEm();
 		}
 
+	}
+
+	public User getUserByUserName(String username) {
+		User user = null;
+
+		Dba dba = new Dba();
+		try {
+			EntityManager em = dba.getActiveEm();
+
+			user = em.createQuery("Select a From User a where user=?", User.class).setParameter(1, username)
+					.getSingleResult();
+
+			logger.debug("User found: " + user.toString());
+
+		} catch (NoResultException e) {
+			return null;
+		}
+
+		finally {
+			// 100% sure that the transaction and entity manager will be closed
+			dba.closeEm();
+		}
+
+		// We return the result
+		return user;
+
+	}
+
+	public User getUserByUserNameAndPassword(String username, String password) {
+		User user = null;
+
+		Dba dba = new Dba();
+		try {
+			EntityManager em = dba.getActiveEm();
+
+			user = em.createQuery("Select a From User a where user=? and password=?", User.class)
+					.setParameter(1, username).setParameter(2, password).getSingleResult();
+
+			logger.debug("User found: " + user.toString());
+
+		} catch (NoResultException e) {
+			return null;
+		}
+
+		finally {
+			// 100% sure that the transaction and entity manager will be closed
+			dba.closeEm();
+		}
+
+		// We return the result
+		return user;
 	}
 
 }

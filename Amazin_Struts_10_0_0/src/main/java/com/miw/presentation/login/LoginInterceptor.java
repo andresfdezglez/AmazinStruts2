@@ -36,7 +36,7 @@ public class LoginInterceptor extends AbstractInterceptor implements StrutsStati
 		String uri = ctx.getName().toLowerCase();
 		
 		// If the user is not logger we redirect to login
-		if (loginInfo == null && !uri.contains("login")){
+		if (loginInfo == null && !uri.contains("index")){
 			logger.debug("Redirecting to Login");
 			return "login-error";
 		}

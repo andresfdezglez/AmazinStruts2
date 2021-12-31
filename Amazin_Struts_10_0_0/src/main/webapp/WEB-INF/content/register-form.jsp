@@ -14,25 +14,30 @@
 	</header>
 	<nav>
 		<ul>
-			<li><a href="#">Start</a></li>
+
 			<li><a href="http://miw.uniovi.es">About</a></li>
 			<li><a href="mailto:dd@email.com">Contact</a></li>
-			<li><s:a action="logout">
-					<s:text name="Log out" />
-				</s:a></li>
 		</ul>
 	</nav>
 	<section>
-		<article id="a01">
-			<label class="mytitle">Choose an option:</label><br /> <a
-				href="show-books.action">Show Catalog</a><br /> <a
-				href="show-special-offer.action">Show Special Offers!</a>
+		<article>
+			<label class="mytitle">Introduce tus datos:</label><br />
+			<div style="color: red;">
+				<s:property value="#request.userexists" />
+				<br />
+			</div>
+			<s:form action="register">
+				<s:textfield name="newUser.user" label="Nombre de usuario" />
+				<s:password name="newUser.password" label="Password" />
+				<s:password name="newUser.cPassword" label="Repetir password" />
+				<s:submit value="Register" />
+			</s:form>
+
 		</article>
 	</section>
 	<footer>
-		<strong> Master in Web Engineering (miw.uniovi.es).</strong><br /> <em>University
-			of Oviedo </em><br /> Visits:
-		<s:property value="%{#application.counter}" />
 
+		<strong> Master in Web Engineering (miw.uniovi.es).</strong><br /> <em>University
+			of Oviedo </em>
 	</footer>
 </body>

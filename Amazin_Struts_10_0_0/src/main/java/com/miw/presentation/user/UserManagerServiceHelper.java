@@ -17,9 +17,36 @@ public class UserManagerServiceHelper {
 		return (Factories.services.getUserManagerService()).getUsers();
 	}
 
-	public void insertUser(User u) throws Exception {
-		logger.debug("Retrieving Special Offer from Business Layer");
-		(Factories.services.getUserManagerService()).insertUser(u);
+	public boolean insertUser(User u) throws Exception {
+		logger.debug("Inserting User");
+
+		if (getUserByUserName(u.getUser().toLowerCase()) != null)
+			return false;
+		else {
+			(Factories.services.getUserManagerService()).insertUser(u);
+			return true;
+		}
+
+	}
+
+	public User getUserByUserName(String username) throws Exception {
+
+		logger.debug("Getting user by username");
+
+		User user = (Factories.services.getUserManagerService()).getUserByUserName(username);
+
+		return user;
+
+	}
+
+	public User getUserByUserNameAndPassword(String username, String password) throws Exception {
+
+		logger.debug("Getting user by username");
+
+		User user = (Factories.services.getUserManagerService()).getUserByUserNameAndPassword(username,password);
+
+		return user;
+
 	}
 
 }

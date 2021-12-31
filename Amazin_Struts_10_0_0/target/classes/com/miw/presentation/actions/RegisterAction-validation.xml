@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<field name="newUser.user">
+		<field-validator type="requiredstring">
+			<message>Username is required</message>
+		</field-validator>
+	</field>
+
+	<field name="newUser.password">
+		<field-validator type="requiredstring">
+			<message>Password is required</message>
+		</field-validator>
+
+		<field-validator type="stringlength">
+			<param name="minLength">5</param>
+			<param name="maxLength">100</param>
+			<param name="trim">true</param>
+			<message>Password must have be least 5 chars long</message>
+		</field-validator>
+	</field>
+
+<field name="newUser.cPassword">
+		<field-validator type="requiredstring">
+			<message>Confirm password is required</message>
+		</field-validator>
+	</field>
+
+</validators>

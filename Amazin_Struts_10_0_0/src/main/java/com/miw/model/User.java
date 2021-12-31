@@ -3,6 +3,7 @@ package com.miw.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class User {
@@ -12,6 +13,15 @@ public class User {
 	private int id;
 	private String user;
 	private String password;
+	private boolean isAdmin;
+
+	@Transient
+	private String cPassword;
+
+	public User() {
+		super();
+
+	}
 
 	public int getId() {
 		return id;
@@ -35,6 +45,22 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getcPassword() {
+		return cPassword;
+	}
+
+	public void setcPassword(String cPassword) {
+		this.cPassword = cPassword;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 }

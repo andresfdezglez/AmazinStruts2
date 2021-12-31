@@ -15,6 +15,7 @@
 	<nav>
 		<ul>
 			<li><a href="#">Start</a></li>
+			<li><s:a action="register-form"><s:text name="Register" /></s:a></li>
 			<li><a href="http://miw.uniovi.es">About</a></li>
 			<li><a href="mailto:dd@email.com">Contact</a></li>
 		</ul>

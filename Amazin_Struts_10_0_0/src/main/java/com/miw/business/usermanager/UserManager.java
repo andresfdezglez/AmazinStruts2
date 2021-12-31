@@ -19,8 +19,20 @@ public class UserManager implements UserManagerService {
 	}
 
 	public void insertUser(User u) throws Exception {
-		// TODO Auto-generated method stub
+		logger.debug("Inserting user");
 
+		(new UserDataServiceHelper()).insertUser(u);
+
+	}
+
+	public User getUserByUserName(String username) throws Exception {
+		logger.debug("Finding user by username");
+		return (new UserDataServiceHelper()).getUserByUserName(username);
+	}
+
+	public User getUserByUserNameAndPassword(String username, String password) {
+		logger.debug("Finding user by username and password");
+		return (new UserDataServiceHelper()).getUserByUserNameAndPassword(username,password);
 	}
 
 }

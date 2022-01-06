@@ -13,18 +13,19 @@ import javax.persistence.Transient;
 
 @Entity
 public class Book {
-	
-	
-	@Id @GeneratedValue
+
+	@Id
+	@GeneratedValue
 	private int id;
 	private String title;
 	private String description;
 	private String author;
+	private int stock;
+
 	@JoinColumn(name = "taxGroup", nullable = false)
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private VAT vat;
 	private double basePrice;
-	
 
 	@Transient
 	private double price;
@@ -33,34 +34,31 @@ public class Book {
 		return price;
 	}
 
-	
 	public Book() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Book(double price, String title, String description, String author, VAT vat, double basePrice) {
+	public Book(int id, String title, String description, String author, int stock, VAT vat, double basePrice,
+			double price) {
 		super();
-		this.price = price;
+		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.author = author;
+		this.stock = stock;
 		this.vat = vat;
 		this.basePrice = basePrice;
+		this.price = price;
 	}
-	
-	
 
 	public VAT getVat() {
 		return vat;
 	}
 
-
 	public void setVat(VAT vat) {
 		this.vat = vat;
 	}
-
 
 	public void setPrice(double price) {
 		this.price = price;
@@ -106,9 +104,18 @@ public class Book {
 		this.basePrice = basePrice;
 	}
 
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", description=" + description + ", author=" + author
-				+ ", vat=" + vat + ", basePrice=" + basePrice + ", price=" + price + "]";
+				+ ", stock=" + stock + ", vat=" + vat + ", basePrice=" + basePrice + ", price=" + price + "]";
 	}
+
 }

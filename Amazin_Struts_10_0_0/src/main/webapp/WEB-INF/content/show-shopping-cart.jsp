@@ -31,36 +31,50 @@
 	</nav>
 	<section>
 		<article>
+			<div style="color: green;">
+				<s:property value="#request.done" />
+				<br />
+			</div>
+			<div style="color: red;">
+				<s:property value="#request.noStockk" />
+				<br />
+			</div>
+			<%
+				if (request.getAttribute("shoppingCart") != null) {
+			%>
+			<h3>Shopping Cart</h3>
 			<table>
-				<caption>Our catalog:</caption>
+				<caption>The books you have in the shopping cart</caption>
 				<thead>
 					<tr>
 						<th>Title</th>
-						<th>Author</th>
-						<th>Description</th>
+						<th>Quantity</th>
 						<th>Price</th>
-						<th>Stock</th>
 					</tr>
 				</thead>
 				<tbody>
-					<s:iterator value="#request.books" var="book">
+					<s:iterator value="#request.shoppingCart">
 						<tr>
-							<td><s:property value="#book.title" /></td>
-							<td><s:property value="#book.author" /></td>
-							<td><s:property value="#book.description" /></td>
-							<td><s:property value="#book.price" /> &euro;</td>
-							<%
-								if (((User) session.getAttribute("loginInfo")).isAdmin()) {
-							%>
-							<td><s:property value="#book.stock" /></td>
-							<%
-								}
-							%>
-
+							<td><s:property value="key.title" /></td>
+							<td><s:property value="value" /></td>
+							<td><s:property value="key.price" /></td>
 						</tr>
 					</s:iterator>
 				</tbody>
 			</table>
+			<span>Total price:</span> <span> <s:property
+					value="#request.price"></s:property> &euro;
+			</span>
+			<%
+				}
+			%>
+			<%
+				if (request.getAttribute("shoppingCart") == null) {
+			%>
+			<span>There is no book in the shopping cart</span>
+			<%
+				}
+			%>
 		</article>
 	</section>
 	<section>
@@ -68,7 +82,7 @@
 			<label class="mytitle">Choose an option:</label><br /> <a
 				href="book-shopping-cart-form.action">Add book to Shopping Cart</a>
 			<br /> <a href="show-book-shopping-cart.action">Show Shopping
-				Cart</a>
+				Cart</a> <br /> <a href="buy-book.action">Buy</a>
 		</article>
 	</section>
 	<footer>

@@ -10,4 +10,8 @@ public class VATDataServiceHelper {
 	public List<VAT> getVATs() throws Exception {
 		return (Factories.dataServices.getVATDataService()).getVATs();
 	}
+
+	public VAT getVATByTaxGroup(int taxgroup) throws Exception {
+		return (Factories.dataServices.getVATDataService()).getVATByTaxGroup(taxgroup);
+	}
 }

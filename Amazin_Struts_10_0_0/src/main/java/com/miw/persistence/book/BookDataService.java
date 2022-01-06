@@ -8,4 +8,10 @@ public interface BookDataService {
 
 	List<Book> getBooks() throws Exception;
 
+	boolean insertBook(Book newBook);
+
+	Book getBookById(int id);
+
+	boolean update(Book book);
+
 }

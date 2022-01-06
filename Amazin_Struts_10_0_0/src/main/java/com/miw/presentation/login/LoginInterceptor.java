@@ -3,11 +3,10 @@ package com.miw.presentation.login;
 import org.apache.logging.log4j.*;
 import org.apache.struts2.StrutsStatics;
 
-import com.miw.model.LoginInfo;
+import com.miw.model.User;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
-
 
 public class LoginInterceptor extends AbstractInterceptor implements StrutsStatics {
 
@@ -29,20 +28,21 @@ public class LoginInterceptor extends AbstractInterceptor implements StrutsStati
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
 		logger.debug("Interceptor login fired");
-		
+
 		ActionContext ctx = invocation.getInvocationContext();
 
-		LoginInfo loginInfo = (LoginInfo) ctx.getSession().get("loginInfo");
+		User loginInfo = (User) ctx.getSession().get("loginInfo");
 		String uri = ctx.getName().toLowerCase();
-		
+
 		// If the user is not logger we redirect to login
-		if (loginInfo == null && !uri.contains("index")){
+		if (loginInfo == null && !uri.contains("index")) {
 			logger.debug("Redirecting to Login");
 			return "login-error";
 		}
-		
+
 		// Otherwise, we let them pass through
-		logger.debug("User is logged, we let them in: "+loginInfo + " redirected to "+invocation.invoke());
+		// logger.debug("User is logged, we let them in: " + loginInfo + " redirected to
+		// " + invocation.invoke());
 		return invocation.invoke();
 	}
 

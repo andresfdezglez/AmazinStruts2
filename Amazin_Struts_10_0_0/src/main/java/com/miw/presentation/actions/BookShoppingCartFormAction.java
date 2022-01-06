@@ -2,26 +2,28 @@ package com.miw.presentation.actions;
 
 import java.util.Map;
 
-import org.apache.logging.log4j.*;
-import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.RequestAware;
 
 import com.miw.presentation.book.BookManagerServiceHelper;
 import com.opensymphony.xwork2.ActionSupport;
 
-@ParentPackage(value = "miw.Amazin")
-public class ShowBooksAction extends ActionSupport implements RequestAware {
+public class BookShoppingCartFormAction extends ActionSupport implements RequestAware, ApplicationAware {
 
-	private static final long serialVersionUID = -4752542581534740735L;
+	private static final long serialVersionUID = -514040179179406744L;
+
 	Logger logger = LogManager.getLogger(this.getClass());
 	Map<String, Object> request = null;
+	Map<String, Object> application = null;
 
 	public String execute() {
-		logger.debug("Executing ShowBooksCommand");
+		logger.debug("Executing BookShoppingCartFormAction");
 		BookManagerServiceHelper helper = new BookManagerServiceHelper();
 		try {
 
-			request.put("books", helper.getBooks());
+			application.put("books", helper.getBooks());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -29,8 +31,14 @@ public class ShowBooksAction extends ActionSupport implements RequestAware {
 		return SUCCESS;
 	}
 
+	public void setApplication(Map<String, Object> application) {
+		this.application = application;
+
+	}
+
 	public void setRequest(Map<String, Object> request) {
 		this.request = request;
+
 	}
 
 }

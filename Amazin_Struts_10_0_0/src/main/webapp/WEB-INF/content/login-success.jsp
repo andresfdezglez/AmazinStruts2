@@ -1,3 +1,4 @@
+<%@page import="com.miw.model.User"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html >
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -14,7 +15,7 @@
 	</header>
 	<nav>
 		<ul>
-			<li><a href="#">Start</a></li>
+			<li><a href="index.action">Start</a></li>
 			<li><a href="http://miw.uniovi.es">About</a></li>
 			<li><a href="mailto:dd@email.com">Contact</a></li>
 			<li><s:a action="logout">
@@ -27,6 +28,14 @@
 			<label class="mytitle">Choose an option:</label><br /> <a
 				href="show-books.action">Show Catalog</a><br /> <a
 				href="show-special-offer.action">Show Special Offers!</a>
+			<%
+				if (((User) session.getAttribute("loginInfo")).isAdmin()) {
+			%>
+			<br />
+			<a href="add-book-form.action">Add new book</a>
+			<%
+				}
+			%>
 		</article>
 	</section>
 	<footer>

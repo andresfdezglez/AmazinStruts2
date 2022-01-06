@@ -6,6 +6,13 @@ import com.miw.model.Book;
 
 public interface BookManagerService {
 	public List<Book> getBooks() throws Exception;
+
 	public Book getSpecialOffer() throws Exception;
+
+	public boolean insertBook(Book newBook) throws Exception;
+
+	public Book getBookById(int parseInt);
+
+	public boolean update(Book book);
 
 }

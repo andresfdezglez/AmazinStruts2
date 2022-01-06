@@ -66,11 +66,11 @@ public class LoginAction extends ActionSupport implements RequestAware, SessionA
 			return "captcha-error";
 		}
 
-		User user = helper.getUserByUserNameAndPassword(login.getLogin(),login.getPassword());
+		User user = helper.getUserByUserNameAndPassword(login.getLogin(), login.getPassword());
 
 		if (!user.equals(null)) {
 			logger.debug("Loggin in!: " + login);
-			session.put("loginInfo", login);
+			session.put("loginInfo", user);
 			return SUCCESS;
 		}
 
